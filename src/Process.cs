@@ -6,8 +6,17 @@ using R3;
 
 namespace WB.Process;
 
+/// <summary>
+/// A Process.
+/// </summary>
+/// <param name="command">The command to execute.</param>
+/// <param name="arguments">A list of parameters.</param>
 public sealed class Process(string command, string[] arguments) : IDisposable
 {
+    // ┌─────────────────────────────────────────────────────────────────────────────┐
+    // │ Private Fields                                                              │
+    // └─────────────────────────────────────────────────────────────────────────────┘
+
     private readonly Subject<string> standardOutput = new();
 
     private readonly Subject<string> standardError = new();
@@ -20,13 +29,33 @@ public sealed class Process(string command, string[] arguments) : IDisposable
         CreateNoWindow = true,
     };
 
+    // ┌─────────────────────────────────────────────────────────────────────────────┐
+    // │ Public Properties                                                           │
+    // └─────────────────────────────────────────────────────────────────────────────┘
+
+    /// <summary>
+    /// Gets the command that is executed by this <see cref="Process"/>.
+    /// </summary>
     public string Command => processStartInfo.FileName;
 
+    /// <summary>
+    /// Gets the list of arguments.
+    /// </summary>
     public IReadOnlyCollection<string> Arguments => processStartInfo.ArgumentList;
 
-    public Observable<string> StandardError { get; }
+    /// <summary>
+    /// Gets an observable stream standard error messages.
+    /// </summary>
+    public Observable<string> StandardError => standardError.AsObservable();
 
-    public Observable<string> StandardOutput { get; }
+    /// <summary>
+    /// Gets an observable stream of standard output messages.
+    /// </summary>
+    public Observable<string> StandardOutput => standardOutput.AsObservable();
+
+    // ┌─────────────────────────────────────────────────────────────────────────────┐
+    // │ Public Methods                                                              │
+    // └─────────────────────────────────────────────────────────────────────────────┘
 
     /// <inheritdoc/>
     public void Dispose()
@@ -35,6 +64,10 @@ public sealed class Process(string command, string[] arguments) : IDisposable
         standardOutput.Dispose();
     }
 
+    /// <summary>
+    /// Executes the <see cref="Command"/> asynchronous
+    /// </summary>
+    /// <returns>A <see cref="Task"/> that delivers the exit code of the <see cref="Process"/>.</returns>
     public async Task<int> ExecutAsync()
     {
         using System.Diagnostics.Process process = new()
