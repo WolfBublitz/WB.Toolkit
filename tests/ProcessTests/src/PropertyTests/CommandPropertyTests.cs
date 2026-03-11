@@ -1,7 +1,7 @@
 using AwesomeAssertions;
-using WB.Process;
+using WB.Processing;
 
-namespace ProcessTests.PropertyTests.CommandProperyTests;
+namespace ProcessTests.PropertyTests.CommandPropertyTests;
 
 public sealed class TheCommandProperty
 {

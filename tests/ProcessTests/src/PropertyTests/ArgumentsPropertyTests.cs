@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using AwesomeAssertions;
-using WB.Process;
+using WB.Processing;
 
 namespace ProcessTests.PropertyTests.ArgumentsProperyTests;
 

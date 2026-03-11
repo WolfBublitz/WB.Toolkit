@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using R3;
 
-namespace WB.Process;
+namespace WB.Processing;
 
 /// <summary>
 /// A Process.
