@@ -68,7 +68,7 @@ public sealed class Process(string command, params string[] arguments) : IDispos
     /// Executes the <see cref="Command"/> asynchronous
     /// </summary>
     /// <returns>A <see cref="Task"/> that delivers the exit code of the <see cref="Process"/>.</returns>
-    public async Task<int> ExecutAsync()
+    public async Task<int> ExecuteAsync()
     {
         using System.Diagnostics.Process process = new()
         {
