@@ -1,6 +1,6 @@
 using FakeItEasy;
 using WB.Logging;
-using WB.Toolkit;
+using WB.Toolkit.IO;
 
 namespace ProcessTests.PropertyTests.LoggerPropertyTests;
 

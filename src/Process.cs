@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using R3;
 using WB.Logging;
 
-namespace WB.Toolkit;
+namespace WB.Toolkit.IO;
 
 /// <summary>
 /// A Process that executes a <paramref name="command"/> with a list of <paramref name="arguments"/>.
@@ -104,6 +104,14 @@ public sealed class Process(string command, params string[] arguments) : IDispos
             process.BeginOutputReadLine();
 
             await process.WaitForExitAsync(cancellationToken).ConfigureAwait(false);
+
+            process.Exited += (sender, args) =>
+            {
+                if (process.ExitCode != 0)
+                {
+                    Logger?.Error($"Process exited with code {process.ExitCode}");
+                }
+            };
 
             return process.ExitCode;
         }

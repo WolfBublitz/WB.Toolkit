@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using AwesomeAssertions;
-using WB.Toolkit;
+using WB.Toolkit.IO;
 
 namespace ProcessTests.MethodTests.ExecuteAsyncMethodTests;
 
