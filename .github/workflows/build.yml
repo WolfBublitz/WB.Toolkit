@@ -20,7 +20,7 @@ jobs:
         dotnet-version: ${{ inputs.dotnet-version }}
 
     - name: Add scripts to PATH
-      run: echo "GITHUB_WORKSPACE/.github/workflows/scripts" >> $GITHUB_PATH
+      run: echo "$GITHUB_WORKSPACE/.github/workflows/scripts" >> $GITHUB_PATH
 
     - name: Build
       working-directory: src
