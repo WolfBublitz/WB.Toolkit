@@ -19,8 +19,9 @@ jobs:
       with:
         dotnet-version: ${{ inputs.dotnet-version }}
 
+    - name: Add scripts to PATH
+      run: echo "GITHUB_WORKSPACE/.github/workflows/scripts" >> $GITHUB_PATH
+
     - name: Build
       working-directory: src
-      run: |
-        chmod +x $GITHUB_WORKSPACE/.github/workflows/scripts/build-nuget.cs
-        $GITHUB_WORKSPACE/.github/workflows/scripts/build-nuget.cs $GITHUB_WORKSPACE/src/WB.Toolkit.csproj
+      run: scripts/build-nuget.cs WB.Toolkit.csproj
